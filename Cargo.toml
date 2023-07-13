@@ -5,4 +5,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+crate-type = ["cdylib"]
+
 [dependencies]
+marker_api = { git = "https://github.com/rust-marker/marker" }
+marker_utils = { git = "https://github.com/rust-marker/marker" }
+
+[workspace.metadata.marker.lints]
+marker_lints = { git = "https://github.com/rust-marker/marker" }
