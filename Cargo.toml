@@ -12,5 +12,12 @@ crate-type = ["cdylib"]
 marker_api = { git = "https://github.com/rust-marker/marker" }
 marker_utils = { git = "https://github.com/rust-marker/marker" }
 
+[dev-dependencies]
+marker_uitest = { git = "https://github.com/rust-marker/marker" }
+
+[[test]]
+name = "uitest"
+harness = false
+
 [workspace.metadata.marker.lints]
 marker_lints = { git = "https://github.com/rust-marker/marker" }
