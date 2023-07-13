@@ -1,5 +1,5 @@
-# This file is optional, but will make compilation slightly faster, since marker
-# requires nightly internally
+# This file is required for ui-tests. `cargo-marker` can later be called
+# on the stable channel as usual
 
 [toolchain]
-channel = "nightly-2023-06-01"
+channel = "nightly-2023-07-13"
