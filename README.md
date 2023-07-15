@@ -55,6 +55,15 @@ marker_lints = "0.1.0"
 
 You can take a look at [cargo_marker] for more options.
 
+## Continuous Integration
+
+This repository contains a workflow for GitHub. For every push, it will run all tests and check the code with [rustfmt] and [Clippy]. The workflow can be customized by editing the `./.github/rust.yml` file.
+
+<!-- FIXME(xFrednet): Add Marker to the CI and docs, once the first version has been released -->
+
+[Clippy]: https://github.com/rust-lang/rust-clippy
+[rustfmt]: https://github.com/rust-lang/rustfmt
+
 ## Contributing
 
 Contributions are highly appreciated! If you encounter any issues or have suggestions for improvements, please don't hesitate to open an issue or submit a pull request on [this template repository](https://github.com/rust-marker/lint-crate-template).

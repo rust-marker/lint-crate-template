@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 use marker_api::prelude::*;
 use marker_api::{LintPass, LintPassInfo, LintPassInfoBuilder};
 
