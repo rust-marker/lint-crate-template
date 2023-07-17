@@ -32,8 +32,7 @@ This template requires [Cargo], [rustup] and [cargo_marker] to be installed. Mar
 5. Now, it's just a lot of nested ifs and match statements.
     * You can just use print debugging to see the internal structure of nodes.
 
-<!-- FIXME(xFrednet): Update this link once v0.1.0 has been released -->
-[`LintPass`]: https://github.com/rust-marker/marker/blob/master/marker_api/src/lib.rs#L31
+[`LintPass`]: https://docs.rs/marker_api/0.1.1/marker_api/trait.LintPass.html
 
 ### Testing
 
@@ -58,8 +57,6 @@ You can take a look at [cargo_marker] for more options.
 ## Continuous Integration
 
 This repository contains a workflow for GitHub. For every push, it will run all tests and check the code with [rustfmt] and [Clippy]. The workflow can be customized by editing the `./.github/rust.yml` file.
-
-<!-- FIXME(xFrednet): Add Marker to the CI and docs, once the first version has been released -->
 
 [Clippy]: https://github.com/rust-lang/rust-clippy
 [rustfmt]: https://github.com/rust-lang/rustfmt
