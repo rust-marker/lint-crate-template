@@ -50,7 +50,7 @@ marker_lints = { path = './marker_lints' }
 # An external lint crate via git
 marker_lints = { git = "https://github.com/rust-marker/marker" }
 # An external lint crate from a registry
-marker_lints = "0.1.0"
+marker_lints = "0.1.1"
 ```
 
 You can take a look at [cargo_marker] for more options.
