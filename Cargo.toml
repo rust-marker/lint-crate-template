@@ -9,15 +9,15 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-marker_api = { git = "https://github.com/rust-marker/marker" }
-marker_utils = { git = "https://github.com/rust-marker/marker" }
+marker_api = "0.1.0"
+marker_utils = "0.1.0"
 
 [dev-dependencies]
-marker_uitest = { git = "https://github.com/rust-marker/marker" }
+marker_uitest = "0.1.0"
 
 [[test]]
 name = "uitest"
 harness = false
 
 [workspace.metadata.marker.lints]
-marker_lints = { git = "https://github.com/rust-marker/marker" }
+marker_lints = "0.1.0"
