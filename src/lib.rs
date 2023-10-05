@@ -30,17 +30,11 @@ impl LintPass for MyLintPass {
         LintPassInfoBuilder::new(Box::new([MY_LINT])).build()
     }
 
-    fn check_item<'ast>(&mut self, cx: &'ast AstContext<'ast>, item: ItemKind<'ast>) {
+    fn check_item<'ast>(&mut self, cx: &'ast MarkerContext<'ast>, item: ItemKind<'ast>) {
         if let ItemKind::Fn(func) = item {
             if let Some(ident) = func.ident() {
                 if ident.name() == "main" {
-                    cx.emit_lint(
-                        MY_LINT,
-                        item.id(),
-                        "hello, main (From Marker)",
-                        item.span(),
-                        |_| {},
-                    );
+                    cx.emit_lint(MY_LINT, item, "hello, main (From Marker)");
                 }
             }
         }

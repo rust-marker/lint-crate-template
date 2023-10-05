@@ -8,18 +8,13 @@ fn main() -> color_eyre::Result<()> {
     // of a valid crate. The line below will use the `Cargo.toml` if this lint crate.
     // config.dependencies_crate_manifest_path = Some("./Cargo.toml".into());
 
-    let bless = env::var_os("RUST_BLESS").is_some() || env::args().any(|arg| arg == "--bless");
-    if bless {
-        config.output_conflict_handling = OutputConflictHandling::Bless
-    }
-
-    config.stderr_filter(r"\\", "/");
-    config.stdout_filter(r"\\", "/");
+    config.filter(r"\\/", "/");
+    config.filter(r"\\\\", "/");
 
     run_tests_generic(
-        config,
+        vec![config],
         default_file_filter,
         default_per_file_config,
-        status_emitter::Text,
+        status_emitter::Text::quiet(),
     )
 }

@@ -1,18 +1,10 @@
 on:
   push:
-    # Don't run tests, when only text files were modified
-    paths-ignore:
-    - 'COPYRIGHT'
-    - 'LICENSE-*'
-    - '**.md'
-    - '**.txt'
   pull_request:
-    # Don't run tests, when only text files were modified
-    paths-ignore:
-    - 'COPYRIGHT'
-    - 'LICENSE-*'
-    - '**.md'
-    - '**.txt'
+
+defaults:
+  run:
+    shell: bash
 
 env:
   RUST_BACKTRACE: 1
@@ -21,22 +13,35 @@ env:
   RUSTFLAGS: "-Dwarnings"
 
 jobs:
-  rust:
+  rust-test:
     runs-on: ubuntu-latest
 
-    # Setup
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions-rs/toolchain@v1
-      with:
-        toolchain: nightly-2023-07-13
-        components: cargo, clippy, rustfmt, rustc, rustc-dev, llvm-tools
-    - run: rustc -vV
-    - run: cargo install cargo_marker --version 0.2.1
-    - run: cargo marker setup
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      # Marker is required for UI tests
+      - uses: rust-marker/marker@v0.3
+        with:
+          install-only: true
+      - run: cargo test
 
-    # Tests
-    - run: cargo test
-    - run: cargo clippy
-    - run: cargo fmt --check
-    - run: cargo marker
+  rust-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo fmt --check
+
+  rust-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - uses: rust-marker/marker@v0.3
+        with:
+          install-only: true
+
+      - run: cargo clippy --all-features --all-targets
+      - run: cargo doc --no-deps
+      - run: cargo marker -- --all-features --all-targets
