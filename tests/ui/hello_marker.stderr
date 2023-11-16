@@ -6,7 +6,7 @@ warning: hello, main (From Marker)
 7 | | }
   | |_^
   |
-  = note: `#[warn(marker::my_lint)]` on by default
+  = note: `#[warn(marker::lint_crate_template::my_lint)]` on by default
 
 warning: 1 warning emitted
 
