@@ -55,4 +55,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - run: cargo doc --no-deps
+      - run: cargo doc --all-features --no-deps
