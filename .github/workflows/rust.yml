@@ -15,7 +15,14 @@ env:
   RUSTFLAGS: -Dwarnings
 
 jobs:
-  rust-test:
+  cargo-marker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Veetaha/marker@feat/improve-default-action-command
+
+  cargo-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,19 +34,25 @@ jobs:
           install-only: true
       - run: cargo test
 
-  rust-formatting:
+  cargo-fmt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo fmt --check
 
-  rust-lint:
+  cargo-clippy:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo clippy --all-features --all-targets
+
+  cargo-doc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo doc --no-deps
-      - uses: Veetaha/marker@feat/improve-default-action-command
