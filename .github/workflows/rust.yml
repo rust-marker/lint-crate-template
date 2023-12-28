@@ -1,6 +1,8 @@
 on:
-  push:
   pull_request:
+  push:
+    branches:
+      - master
 
 defaults:
   run:
@@ -10,38 +12,48 @@ env:
   RUST_BACKTRACE: 1
   CARGO_TERM_COLOR: always
   # Make sure rustc errors on warnings in the CI
-  RUSTFLAGS: "-Dwarnings"
+  RUSTFLAGS: -Dwarnings
 
 jobs:
-  rust-test:
+  cargo-marker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rust-marker/marker@v0.5
+
+  cargo-test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       # Marker is required for UI tests
-      - uses: rust-marker/marker@v0.4
+      - uses: rust-marker/marker@v0.5
         with:
           install-only: true
       - run: cargo test
 
-  rust-formatting:
+  rust-fmt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo fmt --check
 
-  rust-lint:
+  rust-clippy:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - uses: rust-marker/marker@v0.4
-        with:
-          install-only: true
 
       - run: cargo clippy --all-features --all-targets
-      - run: cargo doc --no-deps
-      - run: cargo marker -- --all-features --all-targets
+
+  cargo-doc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo doc --all-features --no-deps
